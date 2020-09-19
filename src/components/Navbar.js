@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    appBar: {
+        background:
+            "linear-gradient(90deg, rgba(25,13,48,1) 0%, rgba(20,24,51,1) 50%, rgba(13,43,60,1) 100%)",
+    },
     grow: {
         flexGrow: 1,
         flexBasis: 0,
@@ -61,15 +65,10 @@ function Navbar({ user }) {
 
     return (
         <>
-            <AppBar position="static">
+            <AppBar position="static" className={classes.appBar}>
                 <Toolbar>
                     <div className={classes.grow}>
-                        <Button
-                            component={Link}
-                            to="/"
-                            variant="contained"
-                            color="primary"
-                        >
+                        <Button component={Link} to="/" color="primary">
                             <Typography variant="h4" className={classes.title}>
                                 versity
                             </Typography>
@@ -94,8 +93,7 @@ function Navbar({ user }) {
                             <Button
                                 component={Link}
                                 to="/login"
-                                variant="contained"
-                                color="primary"
+                                color="inherit"
                             >
                                 LOG IN
                             </Button>
