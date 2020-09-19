@@ -14,6 +14,7 @@ import grey from "@material-ui/core/colors/grey";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import ThingInfo from "./components/ThingInfo";
 
 const theme = createMuiTheme({
     palette: {
@@ -42,6 +43,7 @@ function App() {
                     <Navbar />
 
                     <Switch>
+                        <Route path="/things/:thingId" component={ThingInfo} />
                         <Route path="/login">
                             <Login></Login>
                         </Route>
