@@ -19,6 +19,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slider from "@material-ui/core/Slider";
+import Paper from "@material-ui/core/Paper";
 
 import ThingList from "./ThingList";
 
@@ -49,9 +50,6 @@ const useStyles = (theme) => ({
     ratings: {
         marginTop: theme.spacing(2),
         padding: theme.spacing(2),
-        backgroundColor: "#606160",
-        borderRadius: theme.spacing(1),
-        boxShadow: "2px 2px 2px #777",
         display: "flex",
         flexDirection: "column",
     },
@@ -61,9 +59,10 @@ const useStyles = (theme) => ({
     },
     right: {
         flex: "1 1 auto",
-        backgroundColor: "#606160",
-        borderRadius: theme.spacing(1),
-        boxShadow: "2px 2px 2px #777",
+        display: "flex",
+        flexDirection: "column",
+    },
+    description: {
         padding: theme.spacing(2),
     },
 });
@@ -114,7 +113,7 @@ class ThingInfo extends React.Component {
                     <div className={classes.info}>
                         <div className={classes.left}>
                             <div className={classes.thumb}></div>
-                            <div className={classes.ratings}>
+                            <Paper elevation={3} className={classes.ratings}>
                                 <Typography variant="h5">
                                     Overall: {thing.rating}
                                 </Typography>
@@ -132,10 +131,17 @@ class ThingInfo extends React.Component {
                                 >
                                     RATE
                                 </Button>
-                            </div>
+                            </Paper>
                         </div>
 
-                        <div className={classes.right}>{thing.description}</div>
+                        <div className={classes.right}>
+                            <Paper
+                                elevation={3}
+                                className={classes.description}
+                            >
+                                {thing.description}
+                            </Paper>
+                        </div>
                     </div>
                 </div>
                 <Dialog open={this.state.rateOpen} onClose={handleRateClose}>
