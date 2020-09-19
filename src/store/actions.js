@@ -1,6 +1,10 @@
-export const Actions = {};
+export const Actions = {
+    USER_SET: "USER_SET",
+};
 
-const actionStateKey = {};
+const actionStateKey = {
+    USER_SET: "user",
+};
 
 export function createAction(action, data) {
     return {

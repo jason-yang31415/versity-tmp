@@ -1,6 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
+import Link from "react-router-dom/Link";
+
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,11 +20,18 @@ const useStyles = makeStyles((theme) => ({
     },
     grow: {
         flexGrow: 1,
+        flexBasis: 0,
     },
     title: {},
+    rightBar: {
+        display: "flex",
+        justifyContent: "flex-end",
+        flexGrow: 1,
+        flexBasis: 0,
+    },
 }));
 
-function Navbar() {
+function Navbar({ user }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
@@ -33,6 +43,7 @@ function Navbar() {
         setAnchorEl(null);
     };
 
+    // account menu if logged in
     const renderMenu = (
         <Menu
             anchorEl={anchorEl}
@@ -44,7 +55,7 @@ function Navbar() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
         </Menu>
     );
 
@@ -52,22 +63,44 @@ function Navbar() {
         <>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h4" className={classes.title}>
-                        versity
-                    </Typography>
-                    <div className={classes.grow}></div>
-                    <Button color="inherit">I AM A BUTTON</Button>
-                    <div className={classes.grow}></div>
-                    <IconButton
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={handleProfileMenuOpen}
-                        color="inherit"
-                    >
-                        <AccountCircle />
-                    </IconButton>
+                    <div className={classes.grow}>
+                        <Button
+                            component={Link}
+                            to="/"
+                            variant="contained"
+                            color="primary"
+                        >
+                            <Typography variant="h4" className={classes.title}>
+                                versity
+                            </Typography>
+                        </Button>
+                    </div>
+
+                    <Button color="inherit">SUBMIT</Button>
+
+                    <div className={classes.rightBar}>
+                        {user ? (
+                            <IconButton
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        ) : (
+                            <Button
+                                component={Link}
+                                to="/login"
+                                variant="contained"
+                                color="primary"
+                            >
+                                LOG IN
+                            </Button>
+                        )}
+                    </div>
                 </Toolbar>
             </AppBar>
             {renderMenu}
@@ -75,4 +108,10 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return {
+        user: state.user,
+    };
+};
+
+export default connect(mapStateToProps, null)(Navbar);
