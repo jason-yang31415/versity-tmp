@@ -38,8 +38,8 @@ const useStyles = (theme) => ({
 });
 
 class Home extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.handler = null;
     }
 

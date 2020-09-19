@@ -66,31 +66,20 @@ function Thing({ item }) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <div className={classes.rating}>9</div>
-            <div className={classes.thumb}></div>
-            <div className={classes.right}>
-                <div className={classes.title}>
-                    <Typography variant="h5">I'M A TEAPOT</Typography>
+        <Link to={`/things/${item.id}`}>
+            <div className={classes.root}>
+                <div className={classes.rating}>{item.rating}</div>
+                <div className={classes.thumb}></div>
+                <div className={classes.right}>
+                    <div className={classes.title}>
+                        <Typography variant="h5">{item.title}</Typography>
+                    </div>
+                    <Typography className={classes.description}>
+                        {item.description}
+                    </Typography>
                 </div>
-                <Typography className={classes.description}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Integer et felis consectetur, cursus dolor sodales, commodo
-                    nisi. Donec molestie, massa at ultricies varius, elit diam
-                    egestas lacus, vel facilisis nunc purus sit amet nisi. Cras
-                    tincidunt, nibh id pharetra consectetur, tortor orci lacinia
-                    diam, vitae sodales tellus velit varius risus. Vestibulum
-                    sit amet sagittis elit, non convallis augue. Sed ut nisl
-                    tellus. Quisque tempus accumsan urna quis semper. Quisque
-                    aliquam condimentum luctus. Aenean eu nulla nec urna
-                    pulvinar pellentesque non vel lectus. Nullam nec
-                    sollicitudin quam. Mauris sed urna risus. Mauris sodales
-                    mollis tellus, eu placerat magna luctus vel. Vestibulum
-                    mattis ut nisl quis suscipit. Etiam elementum vitae eros id
-                    placerat.
-                </Typography>
             </div>
-        </div>
+        </Link>
     );
 }
 
