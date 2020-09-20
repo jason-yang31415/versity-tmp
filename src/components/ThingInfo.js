@@ -20,6 +20,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import Review from "./Review"
+import AddIcon from "@material-ui/icons/Add"
 
 import ThingList from "./ThingList";
 
@@ -31,6 +34,7 @@ const useStyles = (theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        paddingBottom: theme.spacing(12),
     },
     info: {
         marginTop: theme.spacing(2),
@@ -65,6 +69,9 @@ const useStyles = (theme) => ({
     description: {
         padding: theme.spacing(2),
     },
+    review: {
+        display: "flex",
+    }
 });
 
 class ThingInfo extends React.Component {
@@ -163,12 +170,28 @@ class ThingInfo extends React.Component {
                         </div>
 
                         <div className={classes.right}>
-                            <Paper
-                                elevation={3}
-                                className={classes.description}
-                            >
-                                {thing.description}
-                            </Paper>
+                            <div>
+                                <Box pb={2}>
+                                    <Paper
+                                        elevation={3}
+                                        className={classes.description}
+                                    >
+                                        {thing.description}
+                                    </Paper>
+                                </Box>
+                            </div>
+                            <div>
+                                <div className={classes.review}>
+                                    <Typography variant="h5" style={{flexGrow: 1}}>Reviews</Typography>
+                                    <IconButton aria-label="settings">
+                                        <AddIcon />
+                                    </IconButton>
+                                </div>
+
+                                <Review />
+                                <Review />
+                                <Review />
+                            </div>
                         </div>
                     </div>
                 </div>
