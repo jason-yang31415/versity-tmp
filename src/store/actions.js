@@ -9,7 +9,7 @@ export const actionStateKey = {
 
 export function createAction(action, data) {
     return {
-        type: actionStateKey[action],
+        type: action,
         data,
     };
 }

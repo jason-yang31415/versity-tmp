@@ -1,4 +1,7 @@
 import React from "react";
+
+import { connect } from "react-redux";
+
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +15,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+import { signIn } from "./../thunks";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -36,8 +42,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function SignIn() {
+function SignIn({ signIn }) {
     const classes = useStyles();
+    const history = useHistory();
+
+    let [username, setUsername] = React.useState("");
+    const signInClick = () => {
+        signIn(username);
+        history.push("/");
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -55,11 +68,12 @@ export default function SignIn() {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                     <TextField
                         variant="outlined"
@@ -77,11 +91,11 @@ export default function SignIn() {
                         label="Remember me"
                     />
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={signInClick}
                     >
                         Sign In
                     </Button>
@@ -102,3 +116,13 @@ export default function SignIn() {
         </Container>
     );
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signIn: (username) => {
+            dispatch(signIn(username));
+        },
+    };
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);

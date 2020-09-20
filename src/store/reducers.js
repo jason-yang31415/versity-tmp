@@ -1,9 +1,9 @@
 import { Actions, actionStateKey } from "./actions";
 
 export default function (state = {}, action) {
-    if (actionStateKey.hasOwnProperty(action.key)) {
+    if (actionStateKey.hasOwnProperty(action.type)) {
         let cpy = { ...state };
-        state[action.type] = action.data;
+        cpy[actionStateKey[action.type]] = action.data;
         return cpy;
     }
     if (action.type === Actions.SEARCH_LIST_SET) {

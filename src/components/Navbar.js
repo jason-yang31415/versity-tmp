@@ -14,6 +14,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 
+import { signOut } from "../thunks";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
@@ -35,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Navbar({ user }) {
+function Navbar({ user, signOut }) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
@@ -45,6 +47,11 @@ function Navbar({ user }) {
     };
     const handleMenuClose = () => {
         setAnchorEl(null);
+    };
+
+    const signOutClick = () => {
+        signOut();
+        handleMenuClose();
     };
 
     // account menu if logged in
@@ -58,8 +65,9 @@ function Navbar({ user }) {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
+            <MenuItem disabled>{user}</MenuItem>
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
+            <MenuItem onClick={signOutClick}>Log out</MenuItem>
         </Menu>
     );
 
@@ -112,4 +120,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, null)(Navbar);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signOut: () => {
+            dispatch(signOut());
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

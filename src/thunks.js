@@ -1,4 +1,4 @@
-import { Actions } from "./store/actions";
+import { Actions, createAction } from "./store/actions";
 
 export function search(s) {
     return (dispatch) => {
@@ -23,5 +23,17 @@ export function search(s) {
                 return response.json();
             })
             .then((data) => {});
+    };
+}
+
+export function signIn(username) {
+    return (dispatch) => {
+        dispatch(createAction(Actions.USER_SET, username));
+    };
+}
+
+export function signOut() {
+    return (dispatch) => {
+        dispatch(createAction(Actions.USER_SET, null));
     };
 }
