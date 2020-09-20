@@ -16,6 +16,7 @@ import Submit from "./components/Submit";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ThingInfo from "./components/ThingInfo";
+import SubmitReview from "./components/SubmitReview";
 
 const theme = createMuiTheme({
     palette: {
@@ -44,6 +45,7 @@ function App() {
                     <Navbar />
 
                     <Switch>
+                        <Route path="/things/:thingId/review" component={SubmitReview} />
                         <Route path="/things/:thingId" component={ThingInfo} />
                         <Route path="/submit">
                             <Submit></Submit>
