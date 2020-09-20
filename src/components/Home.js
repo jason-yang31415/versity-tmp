@@ -80,7 +80,7 @@ const useStyles = (theme) => ({
 
 function isEmptySearch(s) {
     if (s.text !== "") return false;
-    if (s.type !== "" || s.subject !== "" || s.target_audience !== "")
+    if (s.type !== "" || s.subject !== "" || s.targetAudience !== "")
         return false;
     for (let key of ["rating", "difficulty", "clarity"]) {
         if (s[key][0] !== 0 || s[key][1] !== 10) return false;

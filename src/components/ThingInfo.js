@@ -26,8 +26,9 @@ import AddIcon from "@material-ui/icons/Add";
 
 import ThingList from "./ThingList";
 import Badge from "./Badge";
+import ThingRecommendation from "./ThingRecommendation";
 
-import { search, sendRating } from "../thunks";
+import { search, sendRating, getThingInfo } from "../thunks";
 
 const useStyles = (theme) => ({
     paper: {
@@ -77,6 +78,7 @@ const useStyles = (theme) => ({
     },
     review: {
         display: "flex",
+        alignItems: "center",
     },
 });
 
@@ -88,19 +90,7 @@ class ThingInfo extends React.Component {
         } = this.props;
 
         this.state = {
-            thing: {
-                rating: 9,
-                ratings: {
-                    difficulty: 10,
-                    clarity: 2,
-                },
-                title: "UR A TEAPOT",
-                description: "The authoritative textbook on who is a teapot.",
-                id: "thingone",
-                type: "textbook",
-                subject: "biology",
-                targetAudience: "k-5",
-            },
+            thing: null,
             rateOpen: false,
             rating: {
                 rating: 0,
@@ -129,6 +119,18 @@ class ThingInfo extends React.Component {
         });
     }
 
+    componentDidMount() {
+        const {
+            match: { params },
+        } = this.props;
+        getThingInfo(params.thingId).then((info) => {
+            this.setState({
+                ...this.state,
+                thing: info,
+            });
+        });
+    }
+
     render() {
         if (!this.state.thing) return <></>;
 
@@ -149,6 +151,10 @@ class ThingInfo extends React.Component {
             this.sendRating();
             handleRateClose();
         };
+
+        const thingRecommendations = thing.recommendations.map((th) => (
+            <ThingRecommendation item={th} />
+        ));
 
         return (
             <Container component="main">
@@ -193,7 +199,8 @@ class ThingInfo extends React.Component {
                                     {thing.description}
                                 </Paper>
                             </Box>
-                            <div>
+
+                            <Box mb={2}>
                                 <div className={classes.review}>
                                     <Typography
                                         variant="h5"
@@ -209,7 +216,23 @@ class ThingInfo extends React.Component {
                                 <Review />
                                 <Review />
                                 <Review />
-                            </div>
+                            </Box>
+
+                            <Box mb={2}>
+                                <div className={classes.review}>
+                                    <Typography
+                                        variant="h5"
+                                        style={{ flexGrow: 1 }}
+                                    >
+                                        Next Steps
+                                    </Typography>
+                                    <IconButton aria-label="settings">
+                                        <AddIcon />
+                                    </IconButton>
+                                </div>
+
+                                {thingRecommendations}
+                            </Box>
                         </div>
                     </div>
                 </div>
