@@ -16,6 +16,7 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import Slider from "@material-ui/core/Slider";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import SearchIcon from "@material-ui/icons/Search";
 import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 
 import ThingList from "./ThingList";
@@ -108,17 +109,14 @@ class Home extends React.Component {
     }
 
     trySearch = () => {
-        if (this.handler) clearTimeout(this.handler);
-        this.handler = setTimeout(() => {
-            this.props.search(
-                Object.assign(
-                    {
-                        user: this.props.user,
-                    },
-                    this.state.search
-                )
-            );
-        }, 1000);
+        this.props.search(
+            Object.assign(
+                {
+                    user: this.props.user,
+                },
+                this.state.search
+            )
+        );
     };
 
     onSearchChange = (e) => {
@@ -130,7 +128,7 @@ class Home extends React.Component {
             },
         });
 
-        this.trySearch();
+        // this.trySearch();
     };
 
     onSearchFocus = () => {
@@ -162,7 +160,7 @@ class Home extends React.Component {
             },
         });
 
-        this.trySearch();
+        // this.trySearch();
     };
 
     filterSelect = (key, e) => {
@@ -174,7 +172,7 @@ class Home extends React.Component {
             },
         });
 
-        this.trySearch();
+        // this.trySearch();
     };
 
     onKeyDown = (e) => {
@@ -215,6 +213,9 @@ class Home extends React.Component {
                             onChange={this.onSearchChange}
                             // onFocus={this.onSearchFocus}
                         />
+                        <Button onClick={this.trySearch}>
+                            <SearchIcon />
+                        </Button>
                         <Button
                             onClick={() => {
                                 if (this.state.showAdvanced)
