@@ -9,6 +9,7 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Typography from "@material-ui/core/Typography";
@@ -73,7 +74,6 @@ export default function Submit() {
                 <form className={classes.form} noValidate>
                     <TextField
                         required
-                        align="left"
                         variant="outlined"
                         margin="normal"
                         fullWidth
@@ -106,57 +106,57 @@ export default function Submit() {
                         label="Link to thumbnail"
                         name="thumbnail-url"
                     />
+
                     <FormControl
+                        required
                         variant="outlined"
                         fullWidth
                         margin="normal"
                         className={classes.formControl}
                     >
-                        <InputLabel htmlFor="outlined-type-native-simple">
+                        <InputLabel htmlFor="outlined-type-simple">
                             Content Type
                         </InputLabel>
                         <Select
-                            native
                             value={state.type}
                             onChange={handleChange}
                             label="Content Type"
                             inputProps={{
                                 name: "type",
-                                id: "outlined-type-native-simple",
+                                id: "outlined-type-simple",
                             }}
                         >
-                            <option aria-label="None" value="" />
-                            <option value={"book"}>Book</option>
-                            <option value={"notes"}>Notes</option>
-                            <option value={"video"}>Video</option>
-                            <option value={"course"}>Online Course</option>
+                            <MenuItem value={"book"}>Book</MenuItem>
+                            <MenuItem value={"notes"}>Notes</MenuItem>
+                            <MenuItem value={"video"}>Video</MenuItem>
+                            <MenuItem value={"course"}>Online Course</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl
+                        required
                         variant="outlined"
                         fullWidth
                         margin="normal"
                         className={classes.formControl}
                     >
-                        <InputLabel htmlFor="outlined-subject-native-simple">
+                        <InputLabel htmlFor="outlined-subject-simple">
                             Subject
                         </InputLabel>
                         <Select
-                            native
-                            value={state.type}
+                            value={state.subject}
                             onChange={handleChange}
                             label="Subject"
                             inputProps={{
                                 name: "subject",
-                                id: "outlined-subject-native-simple",
+                                id: "outlined-subject-simple",
                             }}
                         >
-                            <option aria-label="None" value="" />
-                            <option value={"math"}>Math</option>
-                            <option value={"cs"}>Computer Science</option>
-                            <option value={"biology"}>Biology</option>
-                            <option value={"physics"}>Physics</option>
-                            <option value={"chemistry"}>Chemistry</option>
+                            <MenuItem value={"math"}>Math</MenuItem>
+                            <MenuItem value={"cs"}>Computer Science</MenuItem>
+                            <MenuItem value={"biology"}>Biology</MenuItem>
+                            <MenuItem value={"physics"}>Physics</MenuItem>
+                            <MenuItem value={"chemistry"}>Chemistry</MenuItem>
+                            <MenuItem value={"other"}>Other</MenuItem>
                         </Select>
                     </FormControl>
                     <TextField

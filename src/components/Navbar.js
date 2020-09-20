@@ -75,7 +75,7 @@ function Navbar({ user }) {
                         </Button>
                     </div>
 
-                    <Button color="inherit">SUBMIT</Button>
+                    <Button color="inherit" to="/submit" component={Link}>SUBMIT</Button>
 
                     <div className={classes.rightBar}>
                         {user ? (

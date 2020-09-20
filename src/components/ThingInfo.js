@@ -20,6 +20,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
+import Review from "./Review"
 
 import ThingList from "./ThingList";
 
@@ -31,6 +32,7 @@ const useStyles = (theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        paddingBottom: theme.spacing(12),
     },
     info: {
         marginTop: theme.spacing(2),
@@ -135,12 +137,23 @@ class ThingInfo extends React.Component {
                         </div>
 
                         <div className={classes.right}>
-                            <Paper
-                                elevation={3}
-                                className={classes.description}
-                            >
-                                {thing.description}
-                            </Paper>
+                            <div>
+                                <Box pb={2}>
+                                    <Paper
+                                        elevation={3}
+                                        className={classes.description}
+                                    >
+                                        {thing.description}
+                                    </Paper>
+                                </Box>
+                            </div>
+                            <div>
+                                <Typography variant="h5">Reviews</Typography>
+
+                                <Review />
+                                <Review />
+                                <Review />
+                            </div>
                         </div>
                     </div>
                 </div>

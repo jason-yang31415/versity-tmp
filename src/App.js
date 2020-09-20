@@ -12,6 +12,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
 import Navbar from "./components/Navbar";
+import Submit from "./components/Submit";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import ThingInfo from "./components/ThingInfo";
@@ -44,6 +45,9 @@ function App() {
 
                     <Switch>
                         <Route path="/things/:thingId" component={ThingInfo} />
+                        <Route path="/submit">
+                            <Submit></Submit>
+                        </Route>
                         <Route path="/login">
                             <Login></Login>
                         </Route>
