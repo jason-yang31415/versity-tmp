@@ -20,7 +20,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
 import Review from "./Review"
+import AddIcon from "@material-ui/icons/Add"
 
 import ThingList from "./ThingList";
 
@@ -67,6 +69,9 @@ const useStyles = (theme) => ({
     description: {
         padding: theme.spacing(2),
     },
+    review: {
+        display: "flex",
+    }
 });
 
 class ThingInfo extends React.Component {
@@ -148,7 +153,12 @@ class ThingInfo extends React.Component {
                                 </Box>
                             </div>
                             <div>
-                                <Typography variant="h5">Reviews</Typography>
+                                <div className={classes.review}>
+                                    <Typography variant="h5" style={{flexGrow: 1}}>Reviews</Typography>
+                                    <IconButton aria-label="settings">
+                                        <AddIcon />
+                                    </IconButton>
+                                </div>
 
                                 <Review />
                                 <Review />

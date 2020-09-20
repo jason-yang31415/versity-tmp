@@ -70,7 +70,7 @@ export default function Review() {
                         Overall: 5/10,
                         Difficulty: 8/10,
                         Clarity: 1/10
-        "
+                        "
                     />
                     <Box mt="-1em" mb="-2em">
                         <CardContent>
@@ -116,9 +116,7 @@ export default function Review() {
                         <IconButton aria-label="downvote">
                             <ThumbDownIcon />
                         </IconButton>
-                        <Typography
-                            variant="body2"
-                            color="textSecondary">
+                        <Typography variant="body2" color="textSecondary">
                             5/7 people liked this
                         </Typography>
                     </CardActions>
