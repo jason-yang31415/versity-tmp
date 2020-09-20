@@ -10,6 +10,8 @@ import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 
+import Badge from "./Badge";
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
@@ -46,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         color: "black",
+        display: "flex",
+        alignItems: "center",
     },
     description: {
         overflowY: "hidden",
@@ -75,6 +79,7 @@ function Thing({ item }) {
                     <div className={classes.right}>
                         <div className={classes.title}>
                             <Typography variant="h5">{item.title}</Typography>
+                            <Badge type={item.type} />
                         </div>
                         <Typography className={classes.description}>
                             {item.description}

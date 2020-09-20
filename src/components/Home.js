@@ -72,7 +72,21 @@ const useStyles = (theme) => ({
         marginRight: theme.spacing(2),
         marginBottom: theme.spacing(2),
     },
+    thingHeader: {
+        marginTop: theme.spacing(8),
+        fontVariant: "small-caps",
+    },
 });
+
+function isEmptySearch(s) {
+    if (s.text !== "") return false;
+    if (s.type !== "" || s.subject !== "" || s.target_audience !== "")
+        return false;
+    for (let key of ["rating", "difficulty", "clarity"]) {
+        if (s[key][0] !== 0 || s[key][1] !== 10) return false;
+    }
+    return true;
+}
 
 class Home extends React.Component {
     constructor(props) {
@@ -96,7 +110,14 @@ class Home extends React.Component {
     trySearch = () => {
         if (this.handler) clearTimeout(this.handler);
         this.handler = setTimeout(() => {
-            this.props.search(this.state.search);
+            this.props.search(
+                Object.assign(
+                    {
+                        user: this.props.user,
+                    },
+                    this.state.search
+                )
+            );
         }, 1000);
     };
 
@@ -164,6 +185,8 @@ class Home extends React.Component {
 
     componentDidMount() {
         document.addEventListener("keydown", this.onKeyDown);
+
+        this.props.search(this.state.search);
     }
 
     componentWillUnmount() {
@@ -338,6 +361,11 @@ class Home extends React.Component {
                         </div>
                     </Card>
                 </div>
+                <Typography variant="h6" className={classes.thingHeader}>
+                    {isEmptySearch(this.state.search)
+                        ? "Recommended"
+                        : "Results"}
+                </Typography>
                 <ThingList />
             </Container>
         );
@@ -346,6 +374,7 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.user,
         things: state.home.things,
     };
 };

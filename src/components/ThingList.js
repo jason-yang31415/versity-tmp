@@ -18,7 +18,7 @@ import Thing from "./Thing";
 
 const useStyles = (theme) => ({
     things: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(2),
     },
 });
 
