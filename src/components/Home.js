@@ -101,7 +101,7 @@ class Home extends React.Component {
                 clarity: [0, 10],
                 type: "",
                 subject: "",
-                target_audience: "",
+                targetAudience: "",
             },
         };
         this.handler = null;
@@ -304,9 +304,9 @@ class Home extends React.Component {
                                 <Select
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
-                                    value={this.state.search.target_audience}
+                                    value={this.state.search.targetAudience}
                                     onChange={(e) =>
-                                        this.filterSelect("target_audience", e)
+                                        this.filterSelect("targetAudience", e)
                                     }
                                     label="Target Audience"
                                 >
