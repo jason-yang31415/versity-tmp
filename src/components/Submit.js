@@ -15,6 +15,7 @@ import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,10 +46,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Submit() {
     const classes = useStyles();
+    const history = useHistory();
 
     const [state, setState] = React.useState({
         type: "",
         subject: "",
+        audience: "",
     });
 
     const handleChange = (event) => {
@@ -61,6 +64,9 @@ export default function Submit() {
         });
     };
 
+    const submitClick = () => {
+        history.push('/');
+    };
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -159,6 +165,34 @@ export default function Submit() {
                             <MenuItem value={"other"}>Other</MenuItem>
                         </Select>
                     </FormControl>
+                    <FormControl
+                        required
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        className={classes.formControl}
+                    >
+                        <InputLabel htmlFor="outlined-audience-simple">
+                            Target Audience
+                        </InputLabel>
+                        <Select
+                            value={state.audience}
+                            onChange={handleChange}
+                            label="Audience"
+                            inputProps={{
+                                name: "audience",
+                                id: "outlined-audience-simple",
+                            }}
+                        >
+                            <MenuItem value={"k-5"}>K-5</MenuItem>
+                            <MenuItem value={"6-8"}>6-8</MenuItem>
+                            <MenuItem value={"9-12"}>9-12</MenuItem>
+                            <MenuItem value={"undergraduate"}>
+                                Undergraduate
+                            </MenuItem>
+                            <MenuItem value={"expert"}>Expert</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -170,11 +204,11 @@ export default function Submit() {
                         rows={5}
                     />
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={submitClick}
                     >
                         Submit
                     </Button>

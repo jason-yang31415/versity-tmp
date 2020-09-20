@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import Link from "react-router-dom/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -22,7 +22,7 @@ import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Review from "./Review"
-import AddIcon from "@material-ui/icons/Add"
+import CreateIcon from '@material-ui/icons/Create';
 
 import ThingList from "./ThingList";
 
@@ -182,9 +182,17 @@ class ThingInfo extends React.Component {
                             </div>
                             <div>
                                 <div className={classes.review}>
-                                    <Typography variant="h5" style={{flexGrow: 1}}>Reviews</Typography>
-                                    <IconButton aria-label="settings">
-                                        <AddIcon />
+                                    <Typography
+                                        variant="h5"
+                                        style={{ flexGrow: 1 }}
+                                    >
+                                        Reviews
+                                    </Typography>
+                                    <IconButton
+                                        component={Link}
+                                        to={`/things/${thing.id}/review`}
+                                    >
+                                        <CreateIcon />
                                     </IconButton>
                                 </div>
 
