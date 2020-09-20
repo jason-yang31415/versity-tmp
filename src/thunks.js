@@ -37,3 +37,11 @@ export function signOut() {
         dispatch(createAction(Actions.USER_SET, null));
     };
 }
+
+export function sendRating(rating) {
+    console.log(rating);
+    fetch("http://localhost:9000/rate", {
+        method: "POST",
+        body: JSON.stringify(rating),
+    });
+}

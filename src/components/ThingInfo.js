@@ -23,7 +23,7 @@ import Paper from "@material-ui/core/Paper";
 
 import ThingList from "./ThingList";
 
-import { search } from "../thunks";
+import { search, sendRating } from "../thunks";
 
 const useStyles = (theme) => ({
     paper: {
@@ -86,7 +86,31 @@ class ThingInfo extends React.Component {
                 id: "thingone",
             },
             rateOpen: false,
+            rating: {
+                rating: 0,
+                difficulty: 0,
+                clarity: 0,
+            },
         };
+    }
+
+    sendRating() {
+        sendRating({
+            id: this.state.thing.id,
+            rating: this.state.rating.rating,
+            difficulty: this.state.rating.difficulty,
+            clarity: this.state.rating.clarity,
+        });
+    }
+
+    setRating(key, r) {
+        this.setState({
+            ...this.state,
+            rating: {
+                ...this.state.rating,
+                [key]: r,
+            },
+        });
     }
 
     render() {
@@ -104,6 +128,10 @@ class ThingInfo extends React.Component {
             this.setState({
                 rateOpen: false,
             });
+        };
+        const sendRatingClick = () => {
+            this.sendRating();
+            handleRateClose();
         };
 
         return (
@@ -155,6 +183,7 @@ class ThingInfo extends React.Component {
                             max={10}
                             marks
                             valueLabelDisplay="auto"
+                            onChange={(e, val) => this.setRating("rating", val)}
                         />
                         <DialogContentText>Difficulty:</DialogContentText>
                         <Slider
@@ -164,6 +193,9 @@ class ThingInfo extends React.Component {
                             max={10}
                             marks
                             valueLabelDisplay="auto"
+                            onChange={(e, val) =>
+                                this.setRating("difficulty", val)
+                            }
                         />
                         <DialogContentText>Clarity:</DialogContentText>
                         <Slider
@@ -173,13 +205,16 @@ class ThingInfo extends React.Component {
                             max={10}
                             marks
                             valueLabelDisplay="auto"
+                            onChange={(e, val) =>
+                                this.setRating("clarity", val)
+                            }
                         />
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleRateClose} color="primary">
                             Cancel
                         </Button>
-                        <Button onClick={handleRateClose} color="primary">
+                        <Button onClick={sendRatingClick} color="primary">
                             OK
                         </Button>
                     </DialogActions>
