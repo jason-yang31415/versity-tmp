@@ -52,6 +52,7 @@ const useStyles = (theme) => ({
     thumb: {
         height: theme.spacing(40),
         backgroundColor: "blue",
+        objectFit: "cover",
     },
     ratings: {
         marginTop: theme.spacing(2),
@@ -162,7 +163,10 @@ class ThingInfo extends React.Component {
                     <Typography variant="h2">{thing.title}</Typography>
                     <div className={classes.info}>
                         <div className={classes.left}>
-                            <div className={classes.thumb}></div>
+                            <img
+                                className={classes.thumb}
+                                src={thing.thumbnail}
+                            ></img>
                             <Paper elevation={3} className={classes.ratings}>
                                 <Typography variant="h5">
                                     Overall: {thing.rating}

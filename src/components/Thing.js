@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(2),
     },
     rating: {
-        width: theme.spacing(10),
+        width: theme.spacing(12),
         height: "100%",
         color: "#8c8a00",
         marginTop: "auto",
@@ -35,10 +35,11 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: "center",
     },
     thumb: {
-        width: theme.spacing(10),
+        width: theme.spacing(12),
         flexShrink: 0,
         backgroundColor: "red",
         marginLeft: theme.spacing(2),
+        objectFit: "cover",
     },
     right: {
         flexGrow: 1,
@@ -78,7 +79,7 @@ function Thing({ item }) {
             <CardActionArea component={Link} to={`/things/${item.id}`}>
                 <div className={classes.root}>
                     <div className={classes.rating}>{item.rating}</div>
-                    <div className={classes.thumb}></div>
+                    <img className={classes.thumb} src={item.thumbnail}></img>
                     <div className={classes.right}>
                         <div className={classes.title}>
                             <Typography

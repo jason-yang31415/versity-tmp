@@ -19,6 +19,10 @@ import Thing from "./Thing";
 const useStyles = (theme) => ({
     things: {
         marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(8),
+    },
+    wrapper: {
+        marginBottom: theme.spacing(1),
     },
 });
 
@@ -28,7 +32,11 @@ class ThingList extends React.Component {
 
         let comps = [];
         for (let th of this.props.things) {
-            comps.push(<Thing item={th} />);
+            comps.push(
+                <div className={classes.wrapper}>
+                    <Thing item={th} />
+                </div>
+            );
         }
 
         return <div className={classes.things}>{comps}</div>;
