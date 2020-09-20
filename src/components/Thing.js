@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         padding: theme.spacing(1),
     },
+    titleText: {
+        marginRight: theme.spacing(1),
+    },
     title: {
         color: "black",
         display: "flex",
@@ -78,7 +81,12 @@ function Thing({ item }) {
                     <div className={classes.thumb}></div>
                     <div className={classes.right}>
                         <div className={classes.title}>
-                            <Typography variant="h5">{item.title}</Typography>
+                            <Typography
+                                variant="h5"
+                                className={classes.titleText}
+                            >
+                                {item.title}
+                            </Typography>
                             <Badge type={item.type} />
                         </div>
                         <Typography className={classes.description}>

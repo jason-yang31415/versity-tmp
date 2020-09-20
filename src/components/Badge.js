@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(1),
         borderRadius: theme.spacing(1),
         border: "1px solid #f0b097",
-        marginLeft: theme.spacing(2),
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
     },
     text: {
         fontVariant: "small-caps",

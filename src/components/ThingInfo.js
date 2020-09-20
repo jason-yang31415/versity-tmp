@@ -21,10 +21,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Slider from "@material-ui/core/Slider";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
-import Review from "./Review"
-import AddIcon from "@material-ui/icons/Add"
+import Review from "./Review";
+import AddIcon from "@material-ui/icons/Add";
 
 import ThingList from "./ThingList";
+import Badge from "./Badge";
 
 import { search, sendRating } from "../thunks";
 
@@ -66,12 +67,17 @@ const useStyles = (theme) => ({
         display: "flex",
         flexDirection: "column",
     },
+    badges: {
+        display: "flex",
+        alignItems: "center",
+        marginBottom: theme.spacing(1),
+    },
     description: {
         padding: theme.spacing(2),
     },
     review: {
         display: "flex",
-    }
+    },
 });
 
 class ThingInfo extends React.Component {
@@ -91,6 +97,9 @@ class ThingInfo extends React.Component {
                 title: "UR A TEAPOT",
                 description: "The authoritative textbook on who is a teapot.",
                 id: "thingone",
+                type: "textbook",
+                subject: "biology",
+                targetAudience: "k-5",
             },
             rateOpen: false,
             rating: {
@@ -170,19 +179,28 @@ class ThingInfo extends React.Component {
                         </div>
 
                         <div className={classes.right}>
-                            <div>
-                                <Box pb={2}>
-                                    <Paper
-                                        elevation={3}
-                                        className={classes.description}
-                                    >
-                                        {thing.description}
-                                    </Paper>
-                                </Box>
+                            <div className={classes.badges}>
+                                <Badge type={thing.type} />
+                                <Badge type={thing.subject} />
+                                <Badge type={thing.targetAudience} />
                             </div>
+
+                            <Box pb={2}>
+                                <Paper
+                                    elevation={3}
+                                    className={classes.description}
+                                >
+                                    {thing.description}
+                                </Paper>
+                            </Box>
                             <div>
                                 <div className={classes.review}>
-                                    <Typography variant="h5" style={{flexGrow: 1}}>Reviews</Typography>
+                                    <Typography
+                                        variant="h5"
+                                        style={{ flexGrow: 1 }}
+                                    >
+                                        Reviews
+                                    </Typography>
                                     <IconButton aria-label="settings">
                                         <AddIcon />
                                     </IconButton>
