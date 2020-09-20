@@ -102,3 +102,11 @@ export function getThingInfo(id) {
         }, 500);
     });
 }
+
+export function submitNewResource(res) {
+    console.log(res);
+    fetch("http://localhost:9000/submit", {
+        method: "POST",
+        body: JSON.stringify(res),
+    });
+}

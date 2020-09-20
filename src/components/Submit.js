@@ -11,11 +11,13 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import LibraryAddIcon from '@material-ui/icons/LibraryAdd';
+import LibraryAddIcon from "@material-ui/icons/LibraryAdd";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+
+import { submitNewResource } from "../thunks";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -49,9 +51,12 @@ export default function Submit() {
     const history = useHistory();
 
     const [state, setState] = React.useState({
+        title: "",
         type: "",
         subject: "",
-        audience: "",
+        targetAudience: "",
+        thumbnail: "",
+        description: "",
     });
 
     const handleChange = (event) => {
@@ -65,7 +70,8 @@ export default function Submit() {
     };
 
     const submitClick = () => {
-        history.push('/');
+        submitNewResource(state);
+        history.push("/");
     };
     return (
         <Container component="main" maxWidth="xs">
@@ -83,9 +89,10 @@ export default function Submit() {
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        id="name"
-                        label="Name"
-                        name="name"
+                        id="title"
+                        label="Title"
+                        name="title"
+                        onChange={handleChange}
                         autoFocus
                     />
                     <TextField
@@ -108,9 +115,11 @@ export default function Submit() {
                         variant="outlined"
                         margin="normal"
                         fullWidth
-                        id="thumbnail-url"
+                        id="thumbnail"
                         label="Link to thumbnail"
-                        name="thumbnail-url"
+                        name="thumbnail"
+                        onChange={handleChange}
+                        required
                     />
 
                     <FormControl
@@ -132,7 +141,7 @@ export default function Submit() {
                                 id: "outlined-type-simple",
                             }}
                         >
-                            <MenuItem value={"book"}>Book</MenuItem>
+                            <MenuItem value={"textbook"}>Book</MenuItem>
                             <MenuItem value={"notes"}>Notes</MenuItem>
                             <MenuItem value={"video"}>Video</MenuItem>
                             <MenuItem value={"course"}>Online Course</MenuItem>
@@ -176,11 +185,11 @@ export default function Submit() {
                             Target Audience
                         </InputLabel>
                         <Select
-                            value={state.audience}
+                            value={state.targetAudience}
                             onChange={handleChange}
                             label="Audience"
                             inputProps={{
-                                name: "audience",
+                                name: "targetAudience",
                                 id: "outlined-audience-simple",
                             }}
                         >
@@ -202,6 +211,7 @@ export default function Submit() {
                         name="description"
                         multiline
                         rows={5}
+                        onChange={handleChange}
                     />
                     <Button
                         fullWidth
