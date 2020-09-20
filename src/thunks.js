@@ -1,7 +1,8 @@
-import { Actions } from "./store/actions";
+import { Actions, createAction } from "./store/actions";
 
 export function search(s) {
     return (dispatch) => {
+        console.log(s);
         dispatch({
             type: Actions.SEARCH_LIST_SET,
             data: [
@@ -23,4 +24,24 @@ export function search(s) {
             })
             .then((data) => {});
     };
+}
+
+export function signIn(username) {
+    return (dispatch) => {
+        dispatch(createAction(Actions.USER_SET, username));
+    };
+}
+
+export function signOut() {
+    return (dispatch) => {
+        dispatch(createAction(Actions.USER_SET, null));
+    };
+}
+
+export function sendRating(rating) {
+    console.log(rating);
+    fetch("http://localhost:9000/rate", {
+        method: "POST",
+        body: JSON.stringify(rating),
+    });
 }
