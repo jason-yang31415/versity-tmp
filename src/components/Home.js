@@ -87,6 +87,7 @@ class Home extends React.Component {
                 clarity: [0, 10],
                 type: "",
                 subject: "",
+                target_audience: "",
             },
         };
         this.handler = null;
@@ -230,7 +231,7 @@ class Home extends React.Component {
                                     label="Type"
                                 >
                                     <MenuItem value="">
-                                        <em>None</em>
+                                        <em>Any</em>
                                     </MenuItem>
                                     <MenuItem value={"book"}>Book</MenuItem>
                                     <MenuItem value={"notes"}>Notes</MenuItem>
@@ -255,7 +256,7 @@ class Home extends React.Component {
                                     label="Subject"
                                 >
                                     <MenuItem value="">
-                                        <em>None</em>
+                                        <em>Any</em>
                                     </MenuItem>
                                     <MenuItem value={"math"}>Math</MenuItem>
                                     <MenuItem value={"cs"}>
@@ -272,7 +273,33 @@ class Home extends React.Component {
                                     </MenuItem>
                                 </Select>
                             </FormControl>
-                            <Typography>Overall:</Typography>
+                            <FormControl
+                                variant="outlined"
+                                className={classes.filterSelect}
+                            >
+                                <InputLabel>Target Audience</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={this.state.search.target_audience}
+                                    onChange={(e) =>
+                                        this.filterSelect("target_audience", e)
+                                    }
+                                    label="Target Audience"
+                                >
+                                    <MenuItem value="">
+                                        <em>Any</em>
+                                    </MenuItem>
+                                    <MenuItem value={"k-5"}>K-5</MenuItem>
+                                    <MenuItem value={"6-8"}>6-8</MenuItem>
+                                    <MenuItem value={"9-12"}>9-12</MenuItem>
+                                    <MenuItem value={"undergraduate"}>
+                                        Undergraduate
+                                    </MenuItem>
+                                    <MenuItem value={"expert"}>Expert</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <Typography>Overall Rating:</Typography>
                             <Slider
                                 defaultValue={[0, 10]}
                                 onChange={(e, val) =>
