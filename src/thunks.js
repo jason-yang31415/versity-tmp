@@ -2,6 +2,7 @@ import { Actions } from "./store/actions";
 
 export function search(s) {
     return (dispatch) => {
+        console.log(s);
         dispatch({
             type: Actions.SEARCH_LIST_SET,
             data: [
